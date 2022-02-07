@@ -1,0 +1,16 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: argocd
+resources:
+- namespace.yaml
+- https://raw.githubusercontent.com/argoproj/argo-cd/v2.2.3/manifests/ha/install.yaml
+
+patchesStrategicMerge:
+  - config/argocd-cm.yaml
+  - config/argocd-gpg-keys-cm.yaml
+  - config/argocd-rbac-cm.yaml
+  - config/argocd-secret.yaml
+  - config/argocd-ssh-known-hosts-cm.yaml
+  - config/argocd-tls-certs-cm.yaml
+  - config/argocd-cmd-params-cm.yaml

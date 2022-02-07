@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: crossplane-system 
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  description: crossplane-system 
+  sourceRepos:
+    - https://charts.crossplane.io/stable
+    - 'git@github.com:laetho/decops.git'
+  destinations:
+    - namespace: '*' 
+      server: https://kubernetes.default.svc
+  clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'
+
